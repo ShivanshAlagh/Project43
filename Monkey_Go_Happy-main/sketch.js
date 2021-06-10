@@ -41,10 +41,12 @@ function setup() {
 
 function draw() { 
   background(0);
+  drawSprites();
 
-  fill(255);
+  stroke("white");
   textSize(20);
-  text("Score: "+score, 300, 220);
+  fill("white");
+  text("Score: "+ score, 550,50);;
 
 
   if(gameState===PLAY){
@@ -83,12 +85,11 @@ function draw() {
     FoodGroup.destroyEach();
     ObstacleGroup.destroyEach();
 
-    fill(255);
     textSize(30);
-    text("Game Over!", 300, 220);
-  }
+    fill(255);
+    text("Game Over!", 300,220);
 
-  drawSprites();
+  
 }
 
 function spawnFood(){
@@ -108,13 +109,12 @@ function spawnFood(){
 function spawnObstacle(){
   if(frameCount % 80 === 0){
     
-    obstacle = createSprite(950, 200, 20, 50);
+var obstacle = createSprite(800,350,10,40);
+    obstacle.velocityX=-(4 + 2*score/100); 
     obstacle.addImage(obstacle_img);
-    obstacle.scale = 0.05;
-    obstacle.y=random(120,200);
-    obstacle.velocityX = -4;
+    
+    obstacle.scale = 0.2;
     obstacle.lifetime = 300;
-    player.depth = obstacle.depth +1;
-    ObstacleGroup.add(obstacle);
+    obstaclesGroup.add(obstacle);
   }
 }
